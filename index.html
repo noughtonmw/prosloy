@@ -9,8 +9,8 @@
   <link rel="icon" href="assets/mark.svg" type="image/svg+xml">
   <link rel="preload" href="assets/fonts/sof-cyr.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/shell.webp" as="image" fetchpriority="high">
-  <link rel="stylesheet" href="styles.css?v=assortment-1">
-  <script src="store.js?v=assortment-1" defer></script>
+  <link rel="stylesheet" href="styles.css?v=seam-1">
+  <script src="store.js?v=seam-1" defer></script>
 </head>
 <body id="top">
   <svg class="sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -126,15 +126,10 @@
 
     <section class="zipper-story shell" aria-labelledby="zipper-title">
       <div class="zipper-art" aria-hidden="true">
-        <div class="zipper-half zipper-left"><img data-src="assets/zipper.webp" alt="" width="840" height="1050" decoding="async" fetchpriority="low"></div>
-        <div class="zipper-half zipper-right"><img data-src="assets/zipper.webp" alt="" width="840" height="1050" decoding="async" fetchpriority="low"></div>
-        <div class="zipper-rail">
-          <svg class="zipper-pull" viewBox="0 0 28 53">
-            <path fill="#29212c" stroke="#6b5665" d="M7 2h14l4 10-4 11H7L3 12Z"/>
-            <path fill="#3a2e3b" stroke="#8c7682" stroke-width="1.2" fill-rule="evenodd" d="M7 17h14l3 25a6 6 0 0 1-6 7h-8a6 6 0 0 1-6-7Zm3 9-1 15h10l-1-15Z"/>
-            <path d="M9 6h10" stroke="#a392a1" stroke-linecap="round"/>
-          </svg>
-        </div>
+        <img class="zipper-fabric" data-src="assets/zipper.webp" alt="" width="840" height="1050" decoding="async" fetchpriority="low">
+        <img class="zipper-lining" data-src="assets/material-twill.webp" alt="" width="280" height="224" decoding="async" fetchpriority="low" hidden>
+        <canvas class="zipper-surface" hidden></canvas>
+        <img class="zipper-pull" data-src="assets/zipper-pull.webp" alt="" width="84" height="232" decoding="async" fetchpriority="low">
       </div>
       <div class="zipper-copy">
         <h2 id="zipper-title">Слой по погоде</h2>

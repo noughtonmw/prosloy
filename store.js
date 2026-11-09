@@ -116,7 +116,12 @@ const anchorPoints = [...hero.querySelectorAll('.hero-anchor')];
 const compactHero = matchMedia('(max-width: 600px)');
 const story = select('.story-window');
 const zipperScene = select('.zipper-story');
-const nativeZipper = CSS.supports('animation-timeline: view()');
+const zipperArt = zipperScene.querySelector('.zipper-art');
+const zipperCopy = zipperScene.querySelector('.zipper-copy');
+const zipperPhoto = zipperArt.querySelector('.zipper-fabric');
+const zipperLining = zipperArt.querySelector('.zipper-lining');
+const zipperPull = zipperArt.querySelector('.zipper-pull');
+const zipperCanvas = zipperArt.querySelector('.zipper-surface');
 const status = select('#status');
 const pictures = new Map();
 let currentIndex = 0;
@@ -274,8 +279,8 @@ window.addEventListener('load', () => {
 }, { once: true });
 
 const grid = select('#products');
-grid.innerHTML = products.map((product, index) => `
-  <article class="product-card" data-type="${product.type}" style="--tile:${product.tile};--delay:${index % 3 * 70}ms">
+grid.innerHTML = products.map(product => `
+  <article class="product-card" data-type="${product.type}" style="--tile:${product.tile}">
     <button class="product-open" type="button" data-product="${product.id}" aria-haspopup="dialog">
       <span class="product-picture">
         <img data-src="${imagePath(product, true)}" alt="" width="480" height="480" decoding="async" fetchpriority="low">
@@ -292,21 +297,28 @@ const mediaObserver = new IntersectionObserver((entries, observer) => {
   for (const { target: element, isIntersecting } of entries) {
     if (!isIntersecting) continue;
     observer.unobserve(element);
-    for (const image of element.querySelectorAll('img[data-src]')) image.src = image.dataset.src;
+    const images = [...element.querySelectorAll('img[data-src]')];
+    for (const image of images) image.src = image.dataset.src;
+    if (element === zipperScene) {
+      Promise.allSettled(images.map(image => image.decode())).then(() => {
+        zipperReady = zipperPhoto.naturalWidth > 0 && zipperPull.naturalWidth > 0;
+        scheduleScroll();
+      });
+    } else {
+      const [image] = images;
+      image.decode().then(() => image.classList.add('is-loaded')).catch(() => {});
+    }
   }
-}, { rootMargin: '240px 0px' });
+}, { rootMargin: '380px 0px' });
 cards.forEach(card => mediaObserver.observe(card));
 mediaObserver.observe(zipperScene);
 const cardObserver = new IntersectionObserver(entries => {
   for (const { target, isIntersecting } of entries) {
     if (!isIntersecting) continue;
-    if (!reduceMotion.matches) {
-      target.classList.add('is-revealing');
-      target.addEventListener('animationend', () => target.classList.remove('is-revealing'), { once: true });
-    }
+    target.classList.add('has-arrived');
     cardObserver.unobserve(target);
   }
-}, { threshold: .16 });
+});
 cards.forEach(card => cardObserver.observe(card));
 
 const filters = [...document.querySelectorAll('[data-filter]')];
@@ -325,6 +337,9 @@ let cityStart = 0;
 let cityAnimations = [];
 let storyVisible = false;
 let zipperVisible = false;
+let zipperReady = false;
+let zipperContext;
+let zipperLayout;
 let wireFrame = 0;
 let followingFloat = false;
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
@@ -468,6 +483,74 @@ function measureCity() {
   if (!cityTimeline) syncCityScroll();
 }
 
+function measureZipper() {
+  const cssWidth = zipperArt.clientWidth;
+  const cssHeight = zipperArt.clientHeight;
+  if (!cssWidth || !cssHeight) return;
+  const maxDensity = compactHero.matches ? 1 : 1.35;
+  const density = Math.min(devicePixelRatio, maxDensity, Math.sqrt(520000 / (cssWidth * cssHeight)));
+  const width = zipperCanvas.width = Math.round(cssWidth * density);
+  const height = zipperCanvas.height = Math.round(cssHeight * density);
+  const scale = Math.max(width / zipperPhoto.naturalWidth, height / zipperPhoto.naturalHeight);
+  const sourceWidth = width / scale;
+  const sourceHeight = height / scale;
+  const photo = document.createElement('canvas');
+  photo.width = width;
+  photo.height = height;
+  photo.getContext('2d', { alpha: false }).drawImage(zipperPhoto,
+    (zipperPhoto.naturalWidth - sourceWidth) / 2, (zipperPhoto.naturalHeight - sourceHeight) / 2,
+    sourceWidth, sourceHeight, 0, 0, width, height);
+  const start = cssHeight * .22;
+  const copyLimit = zipperCopy.offsetTop - zipperArt.offsetTop - zipperPull.offsetHeight * .84 - 12;
+  const end = compactHero.matches ? clamp(copyLimit, start + 20, cssHeight * .79) : cssHeight * .83;
+  return {
+    width, height, cssHeight, start, end, photo,
+    rowHeight: Math.max(3, Math.ceil(height / 150)),
+  };
+}
+
+function paintZipper(progress) {
+  if (!zipperReady) return;
+  if (zipperContext === undefined) zipperContext = zipperCanvas.getContext('2d', { alpha: false });
+  if (!zipperContext) return;
+  zipperLayout ??= measureZipper();
+  if (!zipperLayout || zipperLayout.progress === progress) return;
+  zipperLayout.progress = progress;
+  const { width, height, cssHeight, start, end, photo, rowHeight } = zipperLayout;
+  const ctx = zipperContext;
+  const middle = width / 2;
+  const slider = start + (end - start) * progress;
+  const joined = Math.round(slider * height / cssHeight);
+  zipperArt.style.setProperty('--zip-y', (slider - start) + 'px');
+
+  if (progress === 0) {
+    ctx.drawImage(photo, 0, 0);
+  } else {
+    ctx.fillStyle = '#292231';
+    ctx.fillRect(width * .25, 0, width * .5, joined);
+    if (zipperLining.naturalWidth) {
+      ctx.globalAlpha = .58;
+      ctx.drawImage(zipperLining, 12, 32, 65, 170 * joined / height, width * .25, 0, width * .5, joined);
+      ctx.globalAlpha = 1;
+    }
+
+    // Each scan band reshapes the same photo from the outer edge to the teeth.
+    // Below the slider the original, closed seam continues in one piece.
+    const opening = width * .195 * progress;
+    for (let y = 0; y < joined; y += rowHeight) {
+      const band = Math.min(rowHeight, joined - y);
+      const distance = (joined - y - band / 2) / joined;
+      const spread = opening * Math.pow(distance, 1.38);
+      const left = middle - spread * (.94 + distance * .07);
+      const right = middle + spread * (1.06 - distance * .08);
+      ctx.drawImage(photo, 0, y, middle, band, 0, y, left, band);
+      ctx.drawImage(photo, middle, y, middle, band, right, y, width - right, band);
+    }
+    ctx.drawImage(photo, 0, joined, width, height - joined, 0, joined, width, height - joined);
+  }
+  if (zipperCanvas.hidden) zipperCanvas.hidden = false;
+}
+
 function paintScroll() {
   scrollFrame = 0;
   if (reduceMotion.matches) return;
@@ -491,7 +574,7 @@ function paintScroll() {
   if (zipperVisible) {
     const bounds = zipperScene.getBoundingClientRect();
     const progress = clamp((height * .82 - bounds.top) / (height * .48 + bounds.height * .25), 0, 1);
-    zipperScene.style.setProperty('--zip-open', progress.toFixed(3));
+    paintZipper(progress);
   }
 }
 function scheduleScroll() {
@@ -522,7 +605,13 @@ const sceneObserver = new IntersectionObserver(entries => {
 sceneObserver.observe(hero);
 sceneObserver.observe(citySequence);
 sceneObserver.observe(story);
-if (!nativeZipper) sceneObserver.observe(zipperScene);
+sceneObserver.observe(zipperScene);
+const zipperResizeObserver = new ResizeObserver(() => {
+  zipperLayout = null;
+  scheduleScroll();
+});
+zipperResizeObserver.observe(zipperArt);
+zipperResizeObserver.observe(zipperCopy);
 window.addEventListener('scroll', scheduleScroll, { passive: true });
 window.addEventListener('resize', scheduleScroll, { passive: true });
 const cityResizeObserver = new ResizeObserver(measureCity);
