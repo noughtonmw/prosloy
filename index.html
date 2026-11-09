@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ПРОСЛОЙ. Куртка, флис и брюки из капсулы городской одежды «Смена погоды».">
+  <meta name="theme-color" content="#f3f1f5">
+  <title>ПРОСЛОЙ — городская одежда</title>
+  <link rel="icon" href="assets/mark.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/fonts/sof-cyr.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/shell.webp" as="image" fetchpriority="high">
+  <link rel="stylesheet" href="styles.css">
+  <script src="store.js" defer></script>
+</head>
+<body id="top">
+  <svg class="sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="i-logo" viewBox="0 0 40 40"><path fill="currentColor" d="M2 22 23 4h15L17 22H2Zm0 7L9 23h15l-7 6H2Zm0 7 7-6h15l-7 6H2Z"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24"><path d="M4 12h15m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-left" viewBox="0 0 24 24"><path d="M20 12H5m6-6-6 6 6 6"/></symbol>
+    <symbol id="i-diag" viewBox="0 0 24 24"><path d="M6 18 18 6M8 6h10v10"/></symbol>
+    <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 20V5m-6 6 6-6 6 6"/></symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24"><path d="M5 8h14l1 13H4L5 8Zm4 1V6a3 3 0 0 1 6 0v3"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14M12 5v14"/></symbol>
+    <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 5 5 9-10"/></symbol>
+  </svg>
+  <a class="skip" href="#collection">К каталогу</a>
+  <header class="header shell">
+    <a class="brand" href="#top" aria-label="ПРОСЛОЙ, к началу">
+      <svg aria-hidden="true"><use href="#i-logo"/></svg><span>ПРОСЛОЙ</span>
+    </a>
+    <nav class="nav" aria-label="Навигация">
+      <a href="#collection">Коллекция</a>
+      <a href="#story">О капсуле</a>
+    </nav>
+    <button class="bag" type="button" data-open-cart aria-haspopup="dialog">
+      <svg class="icon" aria-hidden="true"><use href="#i-bag"/></svg><span>Корзина</span><span class="count" data-cart-count>0</span>
+    </button>
+  </header>
+
+  <main>
+    <div class="city-sequence">
+      <picture class="city-depth" aria-hidden="true">
+        <source media="(max-width: 600px)" srcset="assets/city-descent-mobile.webp">
+        <img src="assets/city-descent.webp" alt="" width="1122" height="1402" decoding="async" fetchpriority="low">
+      </picture>
+      <section class="hero shell" aria-label="Витрина новой коллекции" aria-roledescription="слайдер">
+        <h1 class="hero-title"><span>Слои для<br>города</span></h1>
+        <div class="hero-visual">
+          <div class="hero-shadow" aria-hidden="true"></div>
+          <div class="hero-pose">
+            <div class="hero-float">
+              <div class="hero-frames" aria-hidden="true">
+                <img class="hero-item" src="assets/shell.webp" width="900" height="900" fetchpriority="high" alt="" draggable="false">
+              </div>
+              <div class="hero-anchors" aria-hidden="true">
+                <span class="hero-anchor"></span><span class="hero-anchor"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <svg class="hero-wires" aria-hidden="true">
+          <path pathLength="1"/><path pathLength="1"/>
+          <circle r="3.4"/><circle r="3.4"/>
+        </svg>
+        <dl class="hero-features" aria-label="Характеристики вещи">
+          <div class="hero-feature"><dt>Ткань</dt><dd>Рипстоп, 100% нейлон</dd></div>
+          <div class="hero-feature"><dt>Капюшон</dt><dd>Регулируемый</dd></div>
+        </dl>
+        <div class="hero-copy">
+          <p>Куртка, флис и брюки для города,<br class="wide-only"> где погода меняется на ходу.</p>
+          <a class="pill pill-dark" href="#collection">Смотреть коллекцию <svg class="icon" aria-hidden="true"><use href="#i-diag"/></svg></a>
+        </div>
+        <div class="hero-controls">
+          <div class="hero-product" aria-live="polite" aria-atomic="true">
+            <button type="button" id="hero-product" data-product="shell" aria-haspopup="dialog">Куртка «Контур» <svg class="icon" aria-hidden="true"><use href="#i-diag"/></svg></button>
+            <span id="hero-price">12 900 ₽</span>
+          </div>
+          <div class="hero-pager" aria-label="Переключение витрины">
+            <button type="button" class="circle" id="previous" aria-label="Предыдущая вещь"><svg class="icon" aria-hidden="true"><use href="#i-left"/></svg></button>
+            <span id="hero-count" aria-label="Вещь 1 из 3">01 <span></span> 03</span>
+            <button type="button" class="circle" id="next" aria-label="Следующая вещь"><svg class="icon" aria-hidden="true"><use href="#i-right"/></svg></button>
+          </div>
+        </div>
+      </section>
+      <section class="city-chapter shell" aria-labelledby="city-chapter-title">
+        <div class="city-chapter-inner">
+          <div class="city-chapter-copy">
+            <h2 id="city-chapter-title">Ткани для города</h2>
+            <p>Рипстоп держит форму куртки. Плотный флис согревает, а хлопковый твил с 2% эластана тянется при движении.</p>
+          </div>
+          <ul class="city-materials" aria-label="Образцы тканей">
+            <li class="city-material">
+              <img data-src="assets/material-ripstop.webp" alt="Клетка рипстопа у тёмной молнии" width="280" height="224" decoding="async" fetchpriority="low">
+              <div><span>Рипстоп</span><strong>100% нейлон</strong></div>
+            </li>
+            <li class="city-material">
+              <img data-src="assets/material-fleece.webp" alt="Плотный васильковый ворс и плоский шов" width="280" height="224" decoding="async" fetchpriority="low">
+              <div><span>Флис</span><strong>320 г/м²</strong></div>
+            </li>
+            <li class="city-material">
+              <img data-src="assets/material-twill.webp" alt="Диагональное плетение твила у строчки кармана" width="280" height="224" decoding="async" fetchpriority="low">
+              <div><span>Твил</span><strong>98% хлопок</strong></div>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </div>
+
+    <section class="collection content" id="collection" aria-labelledby="collection-title">
+      <div class="collection-head">
+        <h2 id="collection-title">Смена погоды</h2>
+        <div class="filters" role="group" aria-label="Фильтр коллекции">
+          <button type="button" data-filter="all" aria-pressed="true">Все вещи</button>
+          <button type="button" data-filter="top" aria-pressed="false">Верх</button>
+          <button type="button" data-filter="bottom" aria-pressed="false">Брюки</button>
+        </div>
+      </div>
+      <div class="products" id="products"></div>
+      <noscript><p>Включите JavaScript, чтобы открыть каталог и корзину.</p></noscript>
+    </section>
+
+    <section class="story shell" id="story" aria-labelledby="story-title">
+      <div class="story-window">
+        <img class="story-image" src="assets/campaign.webp" width="1400" height="933" alt="Человек в оранжевой куртке поднимается по бетонной лестнице" loading="lazy" decoding="async" fetchpriority="low">
+        <div class="story-text">
+          <h2 id="story-title">Соберите<br>свои слои</h2>
+          <p>Лёгкая куртка для ветра, плотный флис для прохлады и свободные брюки для движения.</p>
+          <a class="pill pill-light" href="#collection">К вещам <svg class="icon" aria-hidden="true"><use href="#i-diag"/></svg></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer content">
+    <a class="brand" href="#top" aria-label="ПРОСЛОЙ, к началу"><svg aria-hidden="true"><use href="#i-logo"/></svg><span>ПРОСЛОЙ</span></a>
+    <p>Демонстрационный магазин</p>
+    <a class="to-top" href="#top">Наверх <svg class="icon" aria-hidden="true"><use href="#i-up"/></svg></a>
+  </footer>
+
+  <dialog class="product-dialog" id="product-dialog" aria-labelledby="product-title">
+    <div class="product-panel">
+      <button type="button" class="circle dialog-close" data-close aria-label="Закрыть карточку" autofocus><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
+      <div class="detail-image" id="detail-image"><img src="assets/shell.webp" alt="" width="900" height="900" loading="lazy" decoding="async"></div>
+      <div class="detail-copy">
+        <h2 id="product-title"></h2>
+        <p id="detail-price" class="detail-price"></p>
+        <p id="detail-description"></p>
+        <p id="detail-color" class="detail-color"></p>
+        <form id="size-form">
+          <fieldset><legend>Размер</legend><div class="sizes" id="sizes"></div></fieldset>
+          <button type="submit" class="pill pill-dark add-button">В корзину <svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></button>
+        </form>
+        <details>
+          <summary>Как выбрать размер</summary>
+          <p id="size-guide"></p>
+        </details>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog class="cart-dialog" id="cart-dialog" aria-labelledby="cart-title">
+    <div class="cart-panel">
+      <header class="cart-head">
+        <h2 id="cart-title">Корзина</h2>
+        <button type="button" class="circle" data-close aria-label="Закрыть корзину" autofocus><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
+      </header>
+      <div class="cart-content" id="cart-content"></div>
+      <footer class="cart-footer" id="cart-footer" hidden>
+        <p class="cart-total"><span>Итого</span><strong id="cart-total"></strong></p>
+        <button class="pill pill-dark" type="button" id="checkout">Оформить демозаказ <svg class="icon" aria-hidden="true"><use href="#i-right"/></svg></button>
+        <p class="cart-note">Это пробное оформление без оплаты.</p>
+      </footer>
+    </div>
+  </dialog>
+  <div class="sr-only" role="status" id="status"></div>
+</body>
+</html>
