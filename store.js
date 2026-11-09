@@ -1,5 +1,9 @@
 'use strict';
 
+const standardSizes = ['XS', 'S', 'M', 'L', 'XL'];
+const chestGuide = 'Ориентир по обхвату груди: XS 84–89 см, S 90–95 см, M 96–101 см, L 102–107 см, XL 108–113 см.';
+const waistGuide = 'Ориентир по обхвату талии: XS 64–69 см, S 70–75 см, M 76–81 см, L 82–87 см, XL 88–93 см.';
+
 const products = [
   {
     id: 'shell', name: 'Куртка «Контур»', price: 12900, type: 'top',
@@ -8,9 +12,9 @@ const products = [
       ['Ткань', 'Рипстоп, 100% нейлон', 36, 60],
       ['Капюшон', 'Регулируемый', 63, 17],
     ],
-    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    sizes: standardSizes,
     description: 'Свободная куртка с высоким капюшоном и глубокими карманами на молниях. Матовый рипстоп держит форму, под курткой остаётся место для флиса.',
-    guide: 'Ориентир по обхвату груди: XS 84–89 см, S 90–95 см, M 96–101 см, L 102–107 см, XL 108–113 см.',
+    guide: chestGuide,
   },
   {
     id: 'fleece', name: 'Флис «Иней»', price: 7400, type: 'top',
@@ -19,9 +23,9 @@ const products = [
       ['Ткань', 'Флис, 100% полиэстер', 30, 63],
       ['Плотность', '320 г/м²', 74, 48],
     ],
-    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    sizes: standardSizes,
     description: 'Объёмный флис с высоким воротником, короткой молнией и карманом на груди. Мягкая фактура и свободный рукав позволяют носить его отдельным слоем.',
-    guide: 'Ориентир по обхвату груди: XS 84–89 см, S 90–95 см, M 96–101 см, L 102–107 см, XL 108–113 см.',
+    guide: chestGuide,
   },
   {
     id: 'trousers', name: 'Брюки «Шаг»', price: 8600, type: 'bottom',
@@ -30,13 +34,61 @@ const products = [
       ['Ткань', 'Твил, 98% хлопок, 2% эластан', 37, 50],
       ['Посадка', 'Встроенный ремень', 54, 7],
     ],
-    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    sizes: standardSizes,
     description: 'Брюки из плотного хлопкового твила с объёмом в колене и сужением к низу. Встроенный ремень регулирует посадку, боковой карман освобождает руки.',
-    guide: 'Ориентир по обхвату талии: XS 64–69 см, S 70–75 см, M 76–81 см, L 82–87 см, XL 88–93 см.',
+    guide: waistGuide,
+  },
+  {
+    id: 'raincoat', name: 'Плащ «Ливень»', price: 15800, type: 'top',
+    color: 'Ежевичный', tile: '#e7dced', sizes: standardSizes, guide: chestGuide,
+    description: 'Длинный плащ из матового нейлона с просторным капюшоном. Широкая планка прикрывает застёжку, а глубокие карманы спрятаны в боковых швах.',
+  },
+  {
+    id: 'vest', name: 'Жилет «Вектор»', price: 6900, type: 'top',
+    color: 'Тёмная олива', tile: '#e1e4d5', sizes: standardSizes, guide: chestGuide,
+    description: 'Свободный жилет из плотной ткани с молнией и плоскими карманами. Широкие проймы позволяют надеть его поверх худи.',
+  },
+  {
+    id: 'overshirt', name: 'Рубашка «Квартал»', price: 6800, type: 'top',
+    color: 'Мох', tile: '#e5eadf', sizes: standardSizes, guide: chestGuide,
+    description: 'Плотная хлопковая рубашка с прямым воротником и двумя карманами с клапанами. Носите застёгнутой или поверх лонгслива.',
+  },
+  {
+    id: 'hoodie', name: 'Худи «Сумерки»', price: 7900, type: 'top',
+    color: 'Бордовый', tile: '#ecdfe1', sizes: standardSizes, guide: chestGuide,
+    description: 'Худи из плотного хлопкового трикотажа с мягкой изнанкой. Объёмный капюшон, спущенное плечо и карман спереди.',
+  },
+  {
+    id: 'longsleeve', name: 'Лонгслив «Слой»', price: 4200, type: 'top',
+    color: 'Овсяный', tile: '#ebe6d9', sizes: standardSizes, guide: chestGuide,
+    description: 'Лонгслив из плотного хлопкового джерси. Прямой крой и тонкая окантовка горловины делают его удобным нижним слоем.',
+  },
+  {
+    id: 'chinos', name: 'Брюки «Переулок»', price: 8300, type: 'bottom',
+    color: 'Табачный', tile: '#eadcca', sizes: standardSizes, guide: waistGuide,
+    description: 'Прямые брюки из хлопкового твила со складками у пояса, шлёвками и косыми карманами. Свободная посадка по бедру.',
+  },
+  {
+    id: 'shorts', name: 'Шорты «Вираж»', price: 5600, type: 'bottom',
+    color: 'Стальной синий', tile: '#dde4ed', sizes: standardSizes, guide: waistGuide,
+    description: 'Прямые шорты до колена из плотного нейлона. Встроенный ремень регулирует талию, два кармана закрываются на молнию.',
+  },
+  {
+    id: 'beanie', name: 'Шапка «Линия»', price: 2800, type: 'accessory',
+    color: 'Охра', tile: '#f4e9d3', sizes: ['Единый'],
+    description: 'Короткая шапка из шерстяной смеси с широкой манжетой. Эластичная вязка в рубчик держит форму.',
+    guide: 'Подходит на обхват головы 54–60 см.',
+  },
+  {
+    id: 'sling', name: 'Сумка «Маршрут»', price: 4900, type: 'accessory',
+    color: 'Чернильный синий', tile: '#dedfec', sizes: ['Единый'],
+    description: 'Компактная сумка через плечо из плотного канваса. Регулируемая стропа, карман на молнии и мягкий корпус.',
+    guide: 'Размер сумки 28 × 16 × 7 см. Длина стропы регулируется от 65 до 115 см.',
   },
 ];
 
 const byId = id => products.find(product => product.id === id);
+const capsule = ['shell', 'fleece', 'trousers'].map(byId);
 const imagePath = (product, small = false) => 'assets/' + product.id + (small ? '-small' : '') + '.webp';
 const money = value => value.toLocaleString('ru-RU') + ' ₽';
 const select = selector => document.querySelector(selector);
@@ -56,28 +108,37 @@ const frames = select('.hero-frames');
 const heroButton = select('#hero-product');
 const float = select('.hero-float');
 const wires = select('.hero-wires');
+const anchors = select('.hero-anchors');
 const wirePaths = [...wires.querySelectorAll('path')];
 const wireDots = [...wires.querySelectorAll('circle')];
 const featureCards = [...hero.querySelectorAll('.hero-feature')];
 const anchorPoints = [...hero.querySelectorAll('.hero-anchor')];
 const compactHero = matchMedia('(max-width: 600px)');
 const story = select('.story-window');
+const zipperScene = select('.zipper-story');
+const nativeZipper = CSS.supports('animation-timeline: view()');
 const status = select('#status');
 const pictures = new Map();
 let currentIndex = 0;
 let requestedIndex = 0;
 let transitionVersion = 0;
 const initialItem = frames.firstElementChild;
+let activeFrame = initialItem;
+let slideTransition;
 const initialImageReady = initialItem.decode();
 hero.classList.add('is-loading');
-updateFeatures(products[0]);
+updateFeatures(capsule[0]);
 initialImageReady.then(() => {
-  if (frames.lastElementChild !== initialItem) return;
+  if (activeFrame !== initialItem) return;
   initialItem.classList.add('is-current');
   hero.classList.remove('is-loading');
   const entrance = initialItem.getAnimations().find(animation => animation.animationName === 'item-in');
-  if (entrance) entrance.finished.then(() => revealWires(initialItem), () => {});
-  else revealWires(initialItem);
+  const finish = () => {
+    initialItem.classList.remove('is-current');
+    revealWires(initialItem);
+  };
+  if (entrance) entrance.finished.then(finish, finish);
+  else finish();
 }).catch(() => {});
 
 function updateFeatures(product) {
@@ -91,9 +152,12 @@ function updateFeatures(product) {
 }
 
 function revealWires(image) {
-  if (frames.lastElementChild !== image) return;
-  hero.classList.add('has-wires');
-  scheduleWires();
+  document.fonts.ready.then(() => {
+    if (activeFrame !== image || !image.naturalWidth) return;
+    updateWireGeometry();
+    hero.classList.add('has-wires');
+    scheduleWires();
+  });
 }
 
 function loadSlide(index) {
@@ -103,7 +167,7 @@ function loadSlide(index) {
     image.alt = '';
     image.draggable = false;
     image.decoding = 'async';
-    image.src = imagePath(products[index]);
+    image.src = imagePath(capsule[index]);
     pictures.set(index, image.decode().then(() => image).catch(error => {
       pictures.delete(index);
       throw error;
@@ -112,14 +176,23 @@ function loadSlide(index) {
   return pictures.get(index);
 }
 
+function settleSlide() {
+  if (!slideTransition) return;
+  const { outgoing, animations } = slideTransition;
+  slideTransition = null;
+  outgoing.remove();
+  animations.forEach(animation => animation.cancel());
+}
+
 async function slide(direction) {
-  requestedIndex = (requestedIndex + direction + products.length) % products.length;
+  requestedIndex = (requestedIndex + direction + capsule.length) % capsule.length;
   const index = requestedIndex;
   const version = ++transitionVersion;
   if (index === currentIndex) return;
   let next;
   try {
-    next = await loadSlide(index);
+    next = (await loadSlide(index)).cloneNode();
+    await next.decode();
   } catch {
     if (version === transitionVersion) {
       requestedIndex = currentIndex;
@@ -128,14 +201,12 @@ async function slide(direction) {
     return;
   }
   if (version !== transitionVersion) return;
-  const old = frames.lastElementChild;
-  for (const frame of [...frames.children]) {
-    frame.getAnimations().forEach(animation => animation.cancel());
-    frame.classList.remove('is-current');
-    if (frame !== old) frame.remove();
-  }
-  const product = products[index];
+  settleSlide();
+  const old = activeFrame;
+  old.classList.remove('is-current');
+  const product = capsule[index];
   currentIndex = index;
+  activeFrame = next;
   frames.append(next);
   hero.classList.remove('is-loading');
   citySequence.style.setProperty('--stage', product.stage);
@@ -145,7 +216,7 @@ async function slide(direction) {
   select('#hero-price').textContent = money(product.price);
   const count = select('#hero-count');
   count.firstChild.nodeValue = String(index + 1).padStart(2, '0') + ' ';
-  count.setAttribute('aria-label', 'Вещь ' + (index + 1) + ' из ' + products.length);
+  count.setAttribute('aria-label', 'Вещь ' + (index + 1) + ' из ' + capsule.length);
 
   if (reduceMotion.matches) {
     old.remove();
@@ -153,16 +224,21 @@ async function slide(direction) {
     return;
   }
   const ease = 'cubic-bezier(.22,1,.36,1)';
-  old.animate(
+  const outgoing = old.animate(
     [{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateX(' + (-direction * 19) + '%) translateY(4%) rotate(' + (-direction * 6) + 'deg) scale(.91)' }],
     { duration: 400, easing: ease, fill: 'forwards' }
-  ).finished.then(() => {
-    if (frames.lastElementChild !== old) old.remove();
-  }, () => {});
-  next.animate(
-    [{ opacity: 0, transform: 'translateX(' + (direction * 17) + '%) translateY(8%) rotate(' + (direction * 5) + 'deg) scale(.92)' }, { opacity: 1, transform: 'none' }],
+  );
+  const incoming = next.animate(
+    [{ opacity: .74, transform: 'translateX(' + (direction * 17) + '%) translateY(8%) rotate(' + (direction * 5) + 'deg) scale(.92)' }, { opacity: 1, transform: 'none' }],
     { duration: 640, easing: ease }
-  ).finished.then(() => revealWires(next), () => {});
+  );
+  const transition = { outgoing: old, animations: [outgoing, incoming] };
+  slideTransition = transition;
+  Promise.allSettled(transition.animations.map(animation => animation.finished)).then(() => {
+    if (slideTransition !== transition) return;
+    settleSlide();
+    revealWires(next);
+  });
 }
 
 select('#previous').addEventListener('click', () => slide(-1));
@@ -190,7 +266,7 @@ hero.addEventListener('touchend', event => {
 }, { passive: true });
 window.addEventListener('load', () => {
   if (navigator.connection?.saveData) return;
-  const preloadSlides = () => products.forEach((_, index) => {
+  const preloadSlides = () => capsule.forEach((_, index) => {
     if (index !== 0) loadSlide(index).catch(() => {});
   });
   if ('requestIdleCallback' in window) requestIdleCallback(preloadSlides, { timeout: 1200 });
@@ -199,10 +275,10 @@ window.addEventListener('load', () => {
 
 const grid = select('#products');
 grid.innerHTML = products.map((product, index) => `
-  <article class="product-card" data-type="${product.type}" style="--tile:${product.tile};--delay:${index * 85}ms">
+  <article class="product-card" data-type="${product.type}" style="--tile:${product.tile};--delay:${index % 3 * 70}ms">
     <button class="product-open" type="button" data-product="${product.id}" aria-haspopup="dialog">
       <span class="product-picture">
-        <img src="${imagePath(product, true)}" alt="" width="480" height="480" loading="lazy" decoding="async" fetchpriority="low">
+        <img data-src="${imagePath(product, true)}" alt="" width="480" height="480" decoding="async" fetchpriority="low">
         <span class="circle product-arrow">${icon('diag')}</span>
       </span>
       <span class="product-caption"><span>${product.name}</span><span class="price">${money(product.price)}</span></span>
@@ -212,6 +288,15 @@ grid.innerHTML = products.map((product, index) => `
 `).join('');
 
 const cards = [...grid.children];
+const mediaObserver = new IntersectionObserver((entries, observer) => {
+  for (const { target: element, isIntersecting } of entries) {
+    if (!isIntersecting) continue;
+    observer.unobserve(element);
+    for (const image of element.querySelectorAll('img[data-src]')) image.src = image.dataset.src;
+  }
+}, { rootMargin: '240px 0px' });
+cards.forEach(card => mediaObserver.observe(card));
+mediaObserver.observe(zipperScene);
 const cardObserver = new IntersectionObserver(entries => {
   for (const { target, isIntersecting } of entries) {
     if (!isIntersecting) continue;
@@ -239,6 +324,7 @@ let cityVisible = true;
 let cityStart = 0;
 let cityAnimations = [];
 let storyVisible = false;
+let zipperVisible = false;
 let wireFrame = 0;
 let followingFloat = false;
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
@@ -251,16 +337,20 @@ function scheduleWires() {
 function paintWires() {
   wireFrame = 0;
   if (!heroVisible || !hero.classList.contains('has-wires')) return;
+  updateWireGeometry();
+  if (followingFloat) scheduleWires();
+}
+function updateWireGeometry() {
   const base = wires.getBoundingClientRect();
   const notes = featureCards.map(card => card.getBoundingClientRect());
   const points = anchorPoints.map(point => point.getBoundingClientRect());
   const compact = compactHero.matches;
   points.forEach((point, index) => {
     const note = notes[index];
-    const x = Math.round(point.left - base.left);
-    const y = Math.round(point.top - base.top);
-    const startX = Math.round((compact ? note.left + note.width / 2 : index === 0 ? note.right : note.left) - base.left);
-    const startY = Math.round((compact ? note.top : note.top + note.height / 2) - base.top);
+    const x = point.left - base.left;
+    const y = point.top - base.top;
+    const startX = (compact ? note.left + note.width / 2 : index === 0 ? note.right : note.left) - base.left;
+    const startY = (compact ? note.top : note.top + note.height / 2) - base.top;
     const distanceX = x - startX;
     const outX = startX + distanceX * (index === 0 ? .68 : .48);
     const inX = x - distanceX * (index === 0 ? .13 : .48);
@@ -272,7 +362,6 @@ function paintWires() {
     wireDots[index].setAttribute('cx', x);
     wireDots[index].setAttribute('cy', y);
   });
-  if (followingFloat) scheduleWires();
 }
 float.addEventListener('animationstart', event => {
   if (event.animationName !== 'float') return;
@@ -286,8 +375,14 @@ for (const eventName of ['animationend', 'animationcancel']) {
     scheduleWires();
   });
 }
-const featureObserver = new ResizeObserver(scheduleWires);
+const featureObserver = new ResizeObserver(entries => {
+  for (const { target: element, contentRect } of entries) {
+    if (element === float) anchors.style.width = Math.min(contentRect.width, contentRect.height) + 'px';
+  }
+  scheduleWires();
+});
 featureObserver.observe(hero);
+featureObserver.observe(float);
 featureCards.forEach(card => featureObserver.observe(card));
 
 function paintPointer() {
@@ -298,8 +393,7 @@ function paintPointer() {
   const values = {
     '--x': position.x * 22 + 'px',
     '--y': position.y * 18 + 'px',
-    '--rx': position.y * -6 + 'deg',
-    '--ry': position.x * 9 + 'deg',
+    '--tilt': position.x * 3 - position.y * 1.4 + 'deg',
     '--shade-x': position.x * 10 + 'px',
     '--shade-y': position.y * 4 + 'px',
     '--shade-scale': 1 - Math.abs(position.y) * .1,
@@ -394,9 +488,14 @@ function paintScroll() {
     story.style.setProperty('--photo-y', (travel - .5) * Math.min(110, bounds.height * .17) + 'px');
     story.style.setProperty('--story-y', (1 - approach) * 28 + 'px');
   }
+  if (zipperVisible) {
+    const bounds = zipperScene.getBoundingClientRect();
+    const progress = clamp((height * .82 - bounds.top) / (height * .48 + bounds.height * .25), 0, 1);
+    zipperScene.style.setProperty('--zip-open', progress.toFixed(3));
+  }
 }
 function scheduleScroll() {
-  if ((heroVisible || storyVisible || (!cityTimeline && cityVisible)) && !scrollFrame && !reduceMotion.matches) {
+  if ((heroVisible || storyVisible || zipperVisible || (!cityTimeline && cityVisible)) && !scrollFrame && !reduceMotion.matches) {
     scrollFrame = requestAnimationFrame(paintScroll);
   }
 }
@@ -411,6 +510,8 @@ const sceneObserver = new IntersectionObserver(entries => {
       }
     } else if (element === citySequence) {
       cityVisible = isIntersecting;
+    } else if (element === zipperScene) {
+      zipperVisible = isIntersecting;
     } else {
       storyVisible = isIntersecting;
       if (!isIntersecting) story.style.removeProperty('--crop');
@@ -421,6 +522,7 @@ const sceneObserver = new IntersectionObserver(entries => {
 sceneObserver.observe(hero);
 sceneObserver.observe(citySequence);
 sceneObserver.observe(story);
+if (!nativeZipper) sceneObserver.observe(zipperScene);
 window.addEventListener('scroll', scheduleScroll, { passive: true });
 window.addEventListener('resize', scheduleScroll, { passive: true });
 const cityResizeObserver = new ResizeObserver(measureCity);
@@ -436,12 +538,10 @@ const materialObserver = new IntersectionObserver(([entry], observer) => {
 }, { rootMargin: '120px' });
 initialImageReady.catch(() => {}).then(() => materialObserver.observe(materials));
 reduceMotion.addEventListener('change', () => {
-  for (const image of [...frames.children]) {
-    image.getAnimations().forEach(animation => animation.cancel());
-    if (image !== frames.lastElementChild) image.remove();
-  }
+  settleSlide();
+  activeFrame.classList.remove('is-current');
   if (reduceMotion.matches) {
-    revealWires(frames.lastElementChild);
+    revealWires(activeFrame);
   }
   measureCity();
   scheduleWires();
@@ -489,7 +589,7 @@ function showProduct(product, trigger) {
   select('#size-guide').textContent = product.guide;
   productDialog.querySelector('details').open = false;
   select('#sizes').innerHTML = product.sizes.map(size =>
-    '<label><input type="radio" name="size" value="' + size + '" required><span>' + size + '</span></label>'
+    '<label><input type="radio" name="size" value="' + size + '" required' + (product.sizes.length === 1 ? ' checked' : '') + '><span>' + size + '</span></label>'
   ).join('');
   productDialog.showModal();
   productDialog.scrollTop = 0;
